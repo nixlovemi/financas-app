@@ -1,0 +1,21 @@
+.active-item {
+  /*border-left: 8px solid #FFF;
+  background-color: #27A9E3;*/
+  --ion-background-color: #27A9E3;
+}
+ion-menu {
+  --ion-background-color: #2E363F;
+  --ion-text-color: #FFF;
+
+  ion-toolbar {
+    --background: #2E363F;
+  }
+
+  ion-icon {
+    color: #FFF;
+  }
+
+  ion-list {/* optional, but it needs when you use gradient as a background color.*/
+    background: transparent;
+  }
+}

@@ -1,0 +1,24 @@
+<form #form="ngForm" (ngSubmit)="login(form)">
+  <ion-grid>
+  	<ion-row justify-content-center>
+  		<ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+  			<div text-center>
+  				<ion-img id="img-login-form" src="assets/logo-financas.png"></ion-img>
+  			</div>
+  			<div padding>
+  				<ion-item>
+  					<ion-input name="usuario" type="text" placeholder="Usuário" [(ngModel)]="frmLogin.usuario" required></ion-input>
+  				</ion-item>
+
+  				<ion-item>
+  					<ion-input name="senha" type="password" placeholder="Senha" [(ngModel)]="frmLogin.senha" required></ion-input>
+  				</ion-item>
+  			</div>
+
+  			<div padding>
+  				<ion-button color="5bb75b" size="large" type="submit" expand="block">Entrar</ion-button>
+  			</div>
+  		</ion-col>
+  	</ion-row>
+  </ion-grid>
+</form>

@@ -1,0 +1,157 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Lançamentos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <mat-expansion-panel style="margin-bottom: 20px;">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <ion-icon name="ios-options"></ion-icon>
+        <ion-label>&nbsp;Filtros</ion-label>
+      </mat-panel-title>
+      <!--
+      <mat-panel-description>
+        This is a summary of the content
+      </mat-panel-description>
+      -->
+    </mat-expansion-panel-header>
+
+    <form #form="ngForm" (ngSubmit)="filtrar(form)">
+      <ion-item>
+        <ion-label>Mês Base</ion-label>
+        <ion-datetime
+            name="mes_base"
+            [(ngModel)]="frmFiltros.mes_base"
+            display-format="MMMM/YYYY"
+            picker-format="MMMM YYYY"
+            month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
+            (ionCancel)="clearInput('mes_base')"
+            cancelText="Limpar"
+            doneText="Selecionar"
+        ></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Vcto Inicial</ion-label>
+        <ion-datetime
+          name="vcto_inicial"
+          [(ngModel)]="frmFiltros.vcto_inicial"
+          display-format="DD/MM/YYYY"
+          picker-format="DD MMMM YYYY"
+          month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
+          (ionCancel)="clearInput('vcto_inicial')"
+          cancelText="Limpar"
+          doneText="Selecionar"
+        ></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Vcto Final</ion-label>
+        <ion-datetime
+          name="vcto_final"
+          [(ngModel)]="frmFiltros.vcto_final"
+          display-format="DD/MM/YYYY"
+          picker-format="DD MMMM YYYY"
+          month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
+          (ionCancel)="clearInput('vcto_final')"
+          cancelText="Limpar"
+          doneText="Selecionar"
+        ></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Pgto Inicial</ion-label>
+        <ion-datetime
+          name="pgto_inicial"
+          [(ngModel)]="frmFiltros.pgto_inicial"
+          display-format="DD/MM/YYYY"
+          picker-format="DD MMMM YYYY"
+          month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
+          (ionCancel)="clearInput('pgto_inicial')"
+          cancelText="Limpar"
+          doneText="Selecionar"
+        ></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Pgto Final</ion-label>
+        <ion-datetime
+          name="pgto_final"
+          [(ngModel)]="frmFiltros.pgto_final"
+          display-format="DD/MM/YYYY"
+          picker-format="DD MMMM YYYY"
+          month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
+          (ionCancel)="clearInput('pgto_final')"
+          cancelText="Limpar"
+          doneText="Selecionar"
+        ></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Descrição</ion-label>
+        <ion-input clearInput="true" name="descricao" [(ngModel)]="frmFiltros.descricao"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Conta</ion-label>
+        <ion-select
+          [(ngModel)]="frmFiltros.conta"
+          name="conta"
+          cancelText="Limpar"
+          okText="Selecionar"
+          (ionCancel)="clearInput('conta')"
+        >
+          <ion-select-option *ngFor="let c of itensConta" [value]="c.con_id">{{c.con_nome}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Tipo</ion-label>
+        <ion-select
+          [(ngModel)]="frmFiltros.tipo"
+          name="tipo"
+          cancelText="Limpar"
+          okText="Selecionar"
+          (ionCancel)="clearInput('tipo')"
+        >
+          <ion-select-option *ngFor="let t of itensTipo" [value]="t.id">{{t.text}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Categoria</ion-label>
+        <ion-select
+          [(ngModel)]="frmFiltros.categoria"
+          name="categoria"
+          cancelText="Limpar"
+          okText="Selecionar"
+          (ionCancel)="clearInput('categoria')"
+        >
+          <ion-select-option *ngFor="let c of itensBaseDespesa" [value]="c.bdp_id">{{c.bdp_descricao}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Exibir</ion-label>
+        <ion-select
+          [(ngModel)]="frmFiltros.exibir"
+          name="exibir"
+          cancelText="Limpar"
+          okText="Selecionar"
+          (ionCancel)="clearInput('exibir')"
+        >
+          <ion-select-option *ngFor="let e of itensExibir" [value]="e.id">{{e.text}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div style="text-align: center; margin-top: 20px;">
+        <button ion-button type="submit" color="" style="background-color: #49afcd; padding: 12px; color: #FFF;">FILTRAR</button>
+      </div>
+    </form>
+  </mat-expansion-panel>
+</ion-content>

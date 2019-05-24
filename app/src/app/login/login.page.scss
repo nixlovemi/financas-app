@@ -1,0 +1,43 @@
+app-login {
+
+}
+
+$white-color: #fff;
+$height100: 100%;
+$bgSite: #2E363F;
+
+ion-grid, form {
+  width:100%;
+  height: $height100;
+  background-color: $bgSite;
+}
+
+ion-row {
+  height: $height100;
+}
+
+ion-col {
+  border: 1px solid #488aff;
+  background: $white-color;
+}
+
+ion-button {
+  font-weight: 300;
+  background-color: #5bb75b
+}
+
+#img-login-form{
+  width: 178px;
+  height: 24px;
+  position: relative;
+  left: 50%;
+  margin-left: -89px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+@media (min-width: 240px) and (max-width: 768px) {
+  ion-col {
+      border: none;
+  }
+}
