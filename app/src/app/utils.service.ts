@@ -42,4 +42,22 @@ export class UtilsService {
 
     return arrInfo;
   }
+
+  /*
+  date: tem que ser no formato ISO String (new Date().toISOString())
+  */
+  formatDate(date, format='YYYY-MM-DD'){
+    // 2019-05-24T19:29:44.645
+
+    let strDate = '' + date.replace('Z', '');
+    let ano     = strDate.substr(0, 4);
+    let mes     = strDate.substr(5, 2);
+    let dia     = strDate.substr(8, 2);
+    let hora    = strDate.substr(11, 2);
+    let minuto  = strDate.substr(14, 2);
+    let segundo = strDate.substr(17, 2);
+
+    let strDateFmt  = format.replace('YYYY', ano).replace('MM', mes).replace('DD', dia).replace('HH', hora).replace('MI', minuto).replace('SS', segundo);
+    return strDateFmt;
+  }
 }

@@ -10,3 +10,24 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.zui-table {
+  border: solid 1px #EFEFEF;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font: normal 11px Arial, sans-serif;
+}
+.zui-table thead th {
+  background-color: #EFEFEF;
+  border: solid 1px #EFEFEF;
+  color: #336B6B;
+  padding: 10px;
+  text-align: left;
+  text-shadow: 1px 1px 1px #fff;
+}
+.zui-table tbody td {
+  border: solid 1px #EFEFEF;
+  color: #333;
+  padding: 10px;
+  text-shadow: 1px 1px 1px #fff;
+}

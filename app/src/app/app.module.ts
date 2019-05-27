@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
 import { MatButtonModule, MatCheckboxModule, MatExpansionModule } from '@angular/material';
+import { MatTableModule } from  '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -23,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatButtonModule,
     MatCheckboxModule,
     MatExpansionModule,
+    MatTableModule,
     BrowserModule,
     HttpModule,
     BrowserAnimationsModule,
