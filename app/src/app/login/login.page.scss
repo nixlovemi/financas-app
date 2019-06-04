@@ -27,13 +27,14 @@ ion-button {
 }
 
 #img-login-form{
-  width: 178px;
-  height: 24px;
+  width: 178px !important;
   position: relative;
   left: 50%;
   margin-left: -89px;
   padding-top: 10px;
   padding-bottom: 10px;
+
+  /*height: 24px !important;*/
 }
 
 @media (min-width: 240px) and (max-width: 768px) {
