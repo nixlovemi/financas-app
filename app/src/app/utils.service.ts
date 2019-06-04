@@ -6,15 +6,21 @@ import { AlertController } from '@ionic/angular';
 })
 export class UtilsService {
   webServicePath = '';
+  appKey = '';
 
   constructor(
     public alertCtr: AlertController,
   ) {
     this.webServicePath = 'http://crochepassoapasso.com.br/financas/Rest/';
+    this.appKey = '9837f6f54e56b471aaa046192d488587';
   }
 
   getWsPath(){
     return this.webServicePath;
+  }
+
+  getAppKey(){
+    return this.appKey;
   }
 
   async showAlert(header, subHeader, message, buttons) {
@@ -59,5 +65,16 @@ export class UtilsService {
 
     let strDateFmt  = format.replace('YYYY', ano).replace('MM', mes).replace('DD', dia).replace('HH', hora).replace('MI', minuto).replace('SS', segundo);
     return strDateFmt;
+  }
+
+  formatMoney(valor, decimais=2, simbolo='') {
+    if(isNaN(valor)){
+      return '';
+    } else {
+      var vValor = parseFloat(valor);
+      var numero = vValor.toFixed(decimais).split('.');
+      numero[0]  = simbolo + numero[0].split(/(?=(?:...)*$)/).join('.');
+      return numero.join(',');
+    }
   }
 }

@@ -13,6 +13,9 @@ import { MatButtonModule, MatCheckboxModule, MatExpansionModule } from '@angular
 import { MatTableModule } from  '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { PageLancamentoEditPageModule } from './page-lancamento-edit/page-lancamento-edit.module';
+import { BrMaskerModule } from 'br-mask';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,6 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     HttpModule,
     BrowserAnimationsModule,
+    PageLancamentoEditPageModule,
+    BrMaskerModule,
   ],
   providers: [
     StatusBar,

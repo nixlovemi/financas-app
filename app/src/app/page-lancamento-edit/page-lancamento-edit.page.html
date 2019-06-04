@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-button color="@" (click)="closeModal()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title>Lançamento ID123</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row style="margin-top: 20px;">
+    <ion-col size="12">
+      <ion-item>
+        <ion-label position="stacked">ID</ion-label>
+        <ion-input readonly name="id" [(ngModel)]="lctoInfo.id"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Descrição</ion-label>
+        <ion-input name="descricao" [(ngModel)]="lctoInfo.descricao"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Tipo</ion-label>
+        <ion-select
+          [(ngModel)]="lctoInfo.tipo"
+          name="tipo"
+          cancelText="Limpar"
+          okText="Selecionar"
+          (ionCancel)="clearInput('tipo')"
+        >
+          <ion-select-option *ngFor="let t of itensTipo" [value]="t.id">{{t.text}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Categoria</ion-label>
+        <ion-select
+          [(ngModel)]="lctoInfo.categoria"
+          name="categoria"
+          cancelText="Limpar"
+          okText="Selecionar"
+          (ionCancel)="clearInput('categoria')"
+        >
+          <ion-select-option *ngFor="let c of itensBaseDespesa" [value]="c.bdp_id">{{c.bdp_descricao}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Vencimento</ion-label>
+        <ion-datetime
+          name="vencimento"
+          [(ngModel)]="lctoInfo.vencimento"
+          display-format="DD/MM/YYYY"
+          picker-format="DD MMMM YYYY"
+          month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
+          (ionCancel)="clearInput('vencimento')"
+          cancelText="Limpar"
+          doneText="Selecionar"
+        ></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Valor R$</ion-label>
+        <ion-input name="valor" [(ngModel)]="lctoInfo.valor" [brmasker]="{money: true, thousand: '.',  decimalCaracter: ',', decimal: '2'}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Pagamento</ion-label>
+        <ion-datetime
+          name="pagamento"
+          [(ngModel)]="lctoInfo.pagamento"
+          display-format="DD/MM/YYYY"
+          picker-format="DD MMMM YYYY"
+          month-names="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
+          (ionCancel)="clearInput('pagamento')"
+          cancelText="Limpar"
+          doneText="Selecionar"
+        ></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Valor Pago R$</ion-label>
+        <ion-input name="valor_pago" [(ngModel)]="lctoInfo.valor_pago" [brmasker]="{money: true, thousand: '.',  decimalCaracter: ',', decimal: '2'}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Conta</ion-label>
+        <ion-select
+          [(ngModel)]="lctoInfo.conta"
+          name="conta"
+          cancelText="Limpar"
+          okText="Selecionar"
+          (ionCancel)="clearInput('conta')"
+        >
+          <ion-select-option *ngFor="let c of itensConta" [value]="c.con_id">{{c.con_nome}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Observação</ion-label>
+        <ion-textarea name="observacao" [(ngModel)]="lctoInfo.observacao"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Confirmado</ion-label>
+        <ion-checkbox value="1" name="confirmado" [(ngModel)]="lctoInfo.isChecked"></ion-checkbox>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button color="success" size="large" type="button" expand="block">Salvar</ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button color="danger" size="large" type="button" expand="block">Deletar</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

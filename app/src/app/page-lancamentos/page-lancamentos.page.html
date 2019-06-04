@@ -172,28 +172,24 @@
                   <th>Vcto</th>
                   <th>Valor</th>
                   <th>Categoria</th>
-                  <th>Pago</th>
+                  <th>Pg</th>
                   <th>Conta</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Tarifa DOC</td>
-                  <td>Despesa</td>
-                  <td>02/05/2019</td>
-                  <td>R$ 9,90</td>
-                  <td>Tarifas</td>
-                  <td>Sim</td>
-                  <td>SANT</td>
+                <tr *ngFor="let l of infoTabela" (click)="editLcto(l.lanId)" [ngClass]="{'td-selected' : l.lanConfirmado == '1'}">
+                  <td>{{l.lanDespesa}}</td>
+                  <td>{{l.tipo}}</td>
+                  <td>{{l.lanVcto}}</td>
+                  <td>{{l.lanValor}}</td>
+                  <td>{{l.despesa}}</td>
+                  <td><ion-icon *ngIf=" l.lanPgto != '' " name="checkmark"></ion-icon></td>
+                  <td>{{l.conta}}</td>
                 </tr>
                 <tr>
-                  <td>[MAG] Pires e Silva - Ração e Limpeza <br /><small>(1/12)</small></td>
-                  <td>Despesa</td>
-                  <td>02/05/2019</td>
-                  <td>R$ 9,90</td>
-                  <td>Tarifas</td>
-                  <td>Sim</td>
-                  <td>SANT</td>
+                  <td colspan="7" align="right">
+                    <small>Exibindo {{infoTabela.length}} linhas</small>
+                  </td>
                 </tr>
               </tbody>
             </table>

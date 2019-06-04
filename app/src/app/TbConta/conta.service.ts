@@ -7,9 +7,11 @@ import { UtilsService } from '../utils.service';
 })
 export class ContaService {
   wsPath = '';
+  appKey = '';
 
   constructor(public http: Http, public utils: UtilsService) {
     this.wsPath = this.utils.getWsPath();
+    this.appKey = this.utils.getAppKey();
   }
 
   getContas()
@@ -17,7 +19,7 @@ export class ContaService {
     return new Promise(
       (resolve, reject) => {
         var link   = this.wsPath + '/getContas';
-        var myData = JSON.stringify({});
+        var myData = JSON.stringify({'appkey':this.appKey});
 
         this.http.post(link, myData)
         .subscribe(data => {
