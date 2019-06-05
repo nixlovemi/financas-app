@@ -23,7 +23,6 @@ export class UsuarioService {
         this.http.post(link, myData)
         .subscribe(data => {
           let jsonRet;
-          console.log(data);
           jsonRet = JSON.parse(data["_body"]);
 
           resolve(jsonRet);

@@ -71,6 +71,74 @@ export class PageLancamentosPage implements OnInit {
 
   }
 
+  carregaContasWS(){
+    this.TbConta.getContas()
+    .then((response) => {
+      let erro      = response["erro"];
+      let msg       = response["msg"];
+      let arrContas = response["arrContas"];
+
+      if(erro == true){
+        this.itensConta = [];
+      } else {
+        this.itensConta = arrContas;
+      }
+    })/*
+    .catch((err) => {
+      res.dismiss();
+      this.utils.showAlert('Erro!', '', 'Erro ao buscar contas. Mensagem:' + err, ['OK']);
+    })*/;
+  }
+
+  carregaDespesasWS(){
+    this.TbBaseDespesa.getBaseDespesas()
+    .then((response) => {
+      let erro            = response["erro"];
+      let msg             = response["msg"];
+      let arrBaseDespesas = response["arrBaseDespesas"];
+
+      if(erro == true){
+        this.itensBaseDespesa = [];
+      } else {
+        this.itensBaseDespesa = arrBaseDespesas;
+      }
+    })/*
+    .catch((err) => {
+      res.dismiss();
+      this.utils.showAlert('Erro!', '', 'Erro ao buscar contas. Mensagem:' + err, ['OK']);
+    })*/;
+  }
+
+  carregaLancamentos(arrInfo){
+    this.TbLancamento.getLancamentos(arrInfo)
+    .then((response) => {
+      this.infoTabela = response["rows"];
+
+      this.infoTotais.receita_total_valor      = this.utils.formatMoney(response["totais"]["receita"]);
+      this.infoTotais.receita_total_pago       = this.utils.formatMoney(response["totais"]["receitaPaga"]);
+      this.infoTotais.receita_total_nao_contab = this.utils.formatMoney(response["totais"]["receitaNaoContabiliza"]);
+      this.infoTotais.despesa_total_pago       = this.utils.formatMoney(response["totais"]["despesa"]);
+      this.infoTotais.despesa_total_valor      = this.utils.formatMoney(response["totais"]["despesaPaga"]);
+      this.infoTotais.despesa_total_nao_contab = this.utils.formatMoney(response["totais"]["despesaNaoContabiliza"]);
+    })/*
+    .catch((err) => {
+      res.dismiss();
+      this.utils.showAlert('Erro!', '', 'Erro ao buscar lançamentos. Mensagem:' + err, ['OK']);
+    })*/;
+  }
+
+  carregaCategoriaGastos(mes, ano){
+    this.TbLancamento.getCategoriaGastos(mes, ano)
+    .then((response: any[]) => {
+      this.itensCategoriaTotal    = response;
+      this.itensCategoriaTotalSum = this.somaTotaisCatGastos(this.itensCategoriaTotal);
+    })/*
+    .catch((err) => {
+      res.dismiss();
+      this.utils.showAlert('Erro!', '', 'Erro ao buscar categoria totais. Mensagem:' + err, ['OK']);
+    })*/;
+  }
+
   ionViewWillEnter(){
     this.loadingCtr.create({
       message: 'Carregando',
@@ -78,67 +146,13 @@ export class PageLancamentosPage implements OnInit {
     }).then((res) => {
       res.present();
 
-      this.TbConta.getContas()
-      .then((response) => {
-        let erro      = response["erro"];
-        let msg       = response["msg"];
-        let arrContas = response["arrContas"];
-
-        if(erro == true){
-          this.itensConta = [];
-        } else {
-          this.itensConta = arrContas;
-        }
-      })
-      .catch((err) => {
-        res.dismiss();
-        this.utils.showAlert('Erro!', '', 'Erro ao buscar contas. Mensagem:' + err, ['OK']);
-      });
-
-      this.TbBaseDespesa.getBaseDespesas()
-      .then((response) => {
-        let erro            = response["erro"];
-        let msg             = response["msg"];
-        let arrBaseDespesas = response["arrBaseDespesas"];
-
-        if(erro == true){
-          this.itensBaseDespesa = [];
-        } else {
-          this.itensBaseDespesa = arrBaseDespesas;
-        }
-      })
-      .catch((err) => {
-        res.dismiss();
-        this.utils.showAlert('Erro!', '', 'Erro ao buscar contas. Mensagem:' + err, ['OK']);
-      });
+      this.carregaContasWS();
+      this.carregaDespesasWS();
 
       let arrInfo = this.filterToArray();
-      this.TbLancamento.getLancamentos(arrInfo)
-      .then((response) => {
-        this.infoTabela = response["rows"];
+      this.carregaLancamentos(arrInfo);
 
-        this.infoTotais.receita_total_valor      = this.utils.formatMoney(response["totais"]["receita"]);
-        this.infoTotais.receita_total_pago       = this.utils.formatMoney(response["totais"]["receitaPaga"]);
-        this.infoTotais.receita_total_nao_contab = this.utils.formatMoney(response["totais"]["receitaNaoContabiliza"]);
-        this.infoTotais.despesa_total_pago       = this.utils.formatMoney(response["totais"]["despesa"]);
-        this.infoTotais.despesa_total_valor      = this.utils.formatMoney(response["totais"]["despesaPaga"]);
-        this.infoTotais.despesa_total_nao_contab = this.utils.formatMoney(response["totais"]["despesaNaoContabiliza"]);
-      })
-      .catch((err) => {
-        res.dismiss();
-        this.utils.showAlert('Erro!', '', 'Erro ao buscar lançamentos. Mensagem:' + err, ['OK']);
-      });
-
-      this.TbLancamento.getCategoriaGastos(this.utils.formatDate(this.frmFiltros.mes_base, 'MM'), this.utils.formatDate(this.frmFiltros.mes_base, 'YYYY'))
-      .then((response) => {
-        this.itensCategoriaTotal    = response;
-        this.itensCategoriaTotalSum = this.somaTotaisCatGastos(this.itensCategoriaTotal);
-      })
-      .catch((err) => {
-        res.dismiss();
-        this.utils.showAlert('Erro!', '', 'Erro ao buscar categoria totais. Mensagem:' + err, ['OK']);
-      });
-
+      this.carregaCategoriaGastos(this.utils.formatDate(this.frmFiltros.mes_base, 'MM'), this.utils.formatDate(this.frmFiltros.mes_base, 'YYYY'));
       res.dismiss();
     });
   }
@@ -294,7 +308,7 @@ export class PageLancamentosPage implements OnInit {
     });
     // =================
 
-    return {
+    return [{
       arrFixos: {
         totalPrevisto           : sumFixosPrev,
         totalPrevistoFormatado  : this.utils.formatMoney(sumFixosPrev),
@@ -319,6 +333,6 @@ export class PageLancamentosPage implements OnInit {
         totalDiferenca          : sumInvestDif,
         totalDiferencaFormatado : this.utils.formatMoney(sumInvestDif),
       },
-    };
+    }];
   }
 }
