@@ -12,5 +12,24 @@ table {
   width: 100%;
 }
 .zui-table tbody tr.td-selected td {
-  color: #3079CA !important;  
+  color: #3079CA !important;
+}
+.icone-totais{
+  font-size: 32px;
+}
+.texto-totais-direita{
+  text-align: right;
+}
+.label-texto-totais{
+  font-size: 12px;
+}
+.zui-table tbody tr.td-excedeu td {
+  color: red !important;
+}
+.zui-table tbody tr td.td-total-gastos {
+  background-color: #000;
+  color: #FFF;
+  text-shadow: none;
+  font-weight: bold;
+  font-size: 14px;
 }
