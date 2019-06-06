@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Lançamentos - Totais</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list>
+          <ion-list-header>
+            Totais Gastos
+          </ion-list-header>
+
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="12">
+                  <span class="totais-gastos-title">Gastos Fixos</span>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="12">
+                  <table width='100%' class="zui-table">
+                    <thead>
+                      <tr>
+                        <th>Categoria</th>
+                        <th>Previsto</th>
+                        <th>Real</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let l of itensCategoriaTotal['arrFixos']" [ngClass]="{'td-excedeu' : l.excedeuPrevisto == '1'}">
+                        <td>{{l.categoria}}</td>
+                        <td>R$ {{l.vlrPrevistoFormatado}}</td>
+                        <td>R$ {{l.vlrRealizadoFormatado}}</td>
+                      </tr>
+                      <tr>
+                        <td class="td-total-gastos" colspan="3" align="center">
+                          TOTAL PREVISTO: R$ {{fixosTotalPrevisto}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="td-total-gastos" colspan="3" align="center">
+                          TOTAL REALIZADO: R$ {{fixosTotalRealizado}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="td-total-gastos" colspan="3" align="center">
+                          DIFERENÇA: R$ {{fixosTotalDiferenca}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="12">
+                  <p class="totais-gastos-title">Gastos Variáveis</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="12">
+                  <table width='100%' class="zui-table">
+                    <thead>
+                      <tr>
+                        <th>Categoria</th>
+                        <th>Previsto</th>
+                        <th>Real</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let l of itensCategoriaTotal['arrVariaveis']" [ngClass]="{'td-excedeu' : l.excedeuPrevisto == '1'}">
+                        <td>{{l.categoria}}</td>
+                        <td>R$ {{l.vlrPrevistoFormatado}}</td>
+                        <td>R$ {{l.vlrRealizadoFormatado}}</td>
+                      </tr>
+                      <tr>
+                        <td class="td-total-gastos" colspan="3" align="center">
+                          TOTAL PREVISTO: R$ {{variavTotalPrevisto}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="td-total-gastos" colspan="3" align="center">
+                          TOTAL REALIZADO: R$ {{variavTotalRealizado}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="td-total-gastos" colspan="3" align="center">
+                          DIFERENÇA: R$ {{variavTotalDiferenca}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="12">
+                  <p class="totais-gastos-title">Investimentos</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="12">
+                  <table width='100%' class="zui-table">
+                    <thead>
+                      <tr>
+                        <th>Categoria</th>
+                        <th>Previsto</th>
+                        <th>Real</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let l of itensCategoriaTotal['arrInvestimento']" [ngClass]="{'td-excedeu' : l.excedeuPrevisto == '1'}">
+                        <td>{{l.categoria}}</td>
+                        <td>R$ {{l.vlrPrevistoFormatado}}</td>
+                        <td>R$ {{l.vlrRealizadoFormatado}}</td>
+                      </tr>
+                      <tr>
+                        <td class="td-total-gastos" colspan="3" align="center">
+                          TOTAL PREVISTO: R$ {{investTotalPrevisto}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="td-total-gastos" colspan="3" align="center">
+                          TOTAL REALIZADO: R$ {{investTotalRealizado}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="td-total-gastos" colspan="3" align="center">
+                          DIFERENÇA: R$ {{investTotalDiferenca}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -10,8 +10,41 @@ import { PageLancamentosPage } from './page-lancamentos.page';
 
 const routes: Routes = [
   {
+    path: 'tabs',
+    component: PageLancamentosPage,
+    children:
+      [
+        {
+          path: 'home',
+          children:
+            [
+              {
+                path: '',
+                loadChildren: '../page-lancamentos-home/page-lancamentos-home.module#PageLancamentosHomePageModule'
+              }
+            ]
+        },
+        {
+          path: 'totais',
+          children:
+            [
+              {
+                path: '',
+                loadChildren: '../page-lancamentos-totais/page-lancamentos-totais.module#PageLancamentosTotaisPageModule'
+              }
+            ]
+        },
+        {
+          path: '',
+          redirectTo: 'tabs/home',
+          pathMatch: 'full'
+        }
+      ]
+  },
+  {
     path: '',
-    component: PageLancamentosPage
+    redirectTo: 'tabs/home',
+    pathMatch: 'full'
   }
 ];
 

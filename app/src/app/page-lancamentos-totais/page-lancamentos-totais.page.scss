@@ -1,0 +1,20 @@
+ion-toolbar {
+  --background: #2E363F;
+  --color: #FFF;
+}
+ion-menu-button{
+  --color: #FFF;
+}
+ion-content{
+  --background: #eeeeee;
+}
+.zui-table tbody tr.td-excedeu td {
+  color: red !important;
+}
+.zui-table tbody tr td.td-total-gastos {
+  background-color: #000;
+  color: #FFF;
+  text-shadow: none;
+  font-weight: bold;
+  font-size: 14px;
+}
