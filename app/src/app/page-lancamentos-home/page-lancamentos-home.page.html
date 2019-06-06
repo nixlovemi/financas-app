@@ -4,6 +4,12 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Lançamentos</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button id="btn-novo-lcto" color="*" fill="outline" (click)="showAddMenu()">
+        Novo
+        <ion-icon slot="end" name="create"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -94,7 +100,7 @@
 
       <ion-item>
         <ion-label>Descrição</ion-label>
-        <ion-input clearInput="true" name="descricao" [(ngModel)]="frmFiltros.descricao"></ion-input>
+        <ion-input class="text-align-right" clearInput="true" name="descricao" [(ngModel)]="frmFiltros.descricao"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -177,7 +183,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let l of infoTabela" (click)="editLcto(l.lanId)" [ngClass]="{'td-selected' : l.lanConfirmado == '1'}">
+                <tr class="tr-lancamentos" *ngFor="let l of infoTabela" (click)="editLcto(l.lanId)" [ngClass]="{'td-selected' : l.lanConfirmado == '1'}">
                   <td>{{l.lanDespesa}}</td>
                   <td>{{l.tipo}}</td>
                   <td>{{l.lanVcto}}</td>

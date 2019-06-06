@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, PopoverController } from '@ionic/angular';
 import { ContaService } from '../TbConta/conta.service';
 import { BaseDespesaService } from '../TbBaseDespesa/base-despesa.service';
 import { LancamentoService } from '../TbLancamento/lancamento.service';
 import { UtilsService } from '../utils.service';
 import { GlobalsService } from '../globals.service';
 import { PageLancamentoEditPage } from '../page-lancamento-edit/page-lancamento-edit.page';
+import { PageLancamentoHomeAddMenuComponent } from '../page-lancamento-home-add-menu/page-lancamento-home-add-menu.component';
 
 @Component({
   selector: 'app-page-lancamentos-home',
@@ -35,7 +36,6 @@ export class PageLancamentosHomePage implements OnInit {
   itensTipo        = [
     {id: 'R', text: 'Receita'},
     {id: 'D', text: 'Despesa'},
-    {id: 'T', text: 'Transferência'},
   ];
   itensExibir      = [
     {id: '', text: 'Todos os Lançamentos'},
@@ -63,6 +63,7 @@ export class PageLancamentosHomePage implements OnInit {
     public loadingCtr: LoadingController,
     public modalController: ModalController,
     public globals: GlobalsService,
+    public popoverCtrl: PopoverController,
   ) {
     let today = new Date().toISOString();
     this.frmFiltros.mes_base = today;
@@ -85,6 +86,8 @@ export class PageLancamentosHomePage implements OnInit {
       } else {
         this.itensConta = arrContas;
       }
+
+      this.globals.setItensConta(this.itensConta);
     })/*
     .catch((err) => {
       res.dismiss();
@@ -104,6 +107,8 @@ export class PageLancamentosHomePage implements OnInit {
       } else {
         this.itensBaseDespesa = arrBaseDespesas;
       }
+
+      this.globals.setItensBaseDespesa(this.itensBaseDespesa);
     })/*
     .catch((err) => {
       res.dismiss();
@@ -254,5 +259,19 @@ export class PageLancamentosHomePage implements OnInit {
     }).catch((err) => {
       this.utils.showAlert('Erro!', '', 'Erro ao buscar lançamento. Mensagem:' + err, ['OK']);
     });
+  }
+
+  async showAddMenu(ev: any) {
+    const popover = await this.popoverCtrl.create({
+        component: PageLancamentoHomeAddMenuComponent,
+        event: ev,
+        translucent: true
+    });
+
+    popover.onDidDismiss().then((data) => {
+      this.filtrar();
+    });
+
+    return await popover.present();
   }
 }

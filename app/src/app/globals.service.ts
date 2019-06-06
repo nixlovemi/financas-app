@@ -4,7 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GlobalsService {
-  mesBase = '';
+  mesBase          = '';
+  itensConta       = [];
+  itensBaseDespesa = [];
 
   constructor() { }
 
@@ -13,5 +15,19 @@ export class GlobalsService {
   }
   setPgLctoMesBase(mesBase){
     this.mesBase = mesBase;
+  }
+
+  getItensBaseDespesa(){
+    return this.itensBaseDespesa;
+  }
+  setItensBaseDespesa(itensBaseDespesa){
+    this.itensBaseDespesa = itensBaseDespesa;
+  }
+
+  getItensConta(){
+    return this.itensConta;
+  }
+  setItensConta(itensConta){
+    this.itensConta = itensConta;
   }
 }

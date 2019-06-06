@@ -54,16 +54,19 @@ export class UtilsService {
   */
   formatDate(date, format='YYYY-MM-DD'){
     // 2019-05-24T19:29:44.645
+    let strDateFmt = '';
+    let strDate    = '' + date.replace('Z', '');
 
-    let strDate = '' + date.replace('Z', '');
-    let ano     = strDate.substr(0, 4);
-    let mes     = strDate.substr(5, 2);
-    let dia     = strDate.substr(8, 2);
-    let hora    = strDate.substr(11, 2);
-    let minuto  = strDate.substr(14, 2);
-    let segundo = strDate.substr(17, 2);
+    if(strDate != '' && strDate != null){
+      let ano     = strDate.substr(0, 4);
+      let mes     = strDate.substr(5, 2);
+      let dia     = strDate.substr(8, 2);
+      let hora    = strDate.substr(11, 2);
+      let minuto  = strDate.substr(14, 2);
+      let segundo = strDate.substr(17, 2);
 
-    let strDateFmt  = format.replace('YYYY', ano).replace('MM', mes).replace('DD', dia).replace('HH', hora).replace('MI', minuto).replace('SS', segundo);
+      strDateFmt  = format.replace('YYYY', ano).replace('MM', mes).replace('DD', dia).replace('HH', hora).replace('MI', minuto).replace('SS', segundo);
+    }
     return strDateFmt;
   }
 
@@ -76,5 +79,14 @@ export class UtilsService {
       numero[0]  = simbolo + numero[0].split(/(?=(?:...)*$)/).join('.');
       return numero.join(',');
     }
+  }
+
+  acertaMoeda(valor){
+    if (valor.length <= 0) {
+        return null;
+    }
+
+    var novoValor = valor.replace(".", "").replace(",", ".").replace("R$", "").replace("US$", "").replace("U$", "").replace("$", "").replace(" ", "");
+    return novoValor;
   }
 }
