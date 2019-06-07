@@ -261,10 +261,10 @@ export class PageLancamentosHomePage implements OnInit {
     });
   }
 
-  async showAddMenu(ev: any) {
+  async showAddMenu(/*ev: any*/) {
     const popover = await this.popoverCtrl.create({
         component: PageLancamentoHomeAddMenuComponent,
-        event: ev,
+        /*event: ev,*/
         translucent: true
     });
 

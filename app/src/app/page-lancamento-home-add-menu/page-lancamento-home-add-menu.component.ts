@@ -17,7 +17,7 @@ export class PageLancamentoHomeAddMenuComponent implements OnInit {
 
   ngOnInit() {}
 
-  async showModalNovoLcto(values, itensBaseDespesa = [], itensConta = []){
+  async showModalNovoLcto(){
     const modal = await this.modalController.create({
       component: PageLancamentoEditPage,
       componentProps: {
@@ -34,4 +34,6 @@ export class PageLancamentoHomeAddMenuComponent implements OnInit {
 
     return await modal.present();
   }
+
+  showModalNovaTrans(){}
 }
