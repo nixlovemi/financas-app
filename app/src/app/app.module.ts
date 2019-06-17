@@ -17,6 +17,21 @@ import { PageLancamentoEditPageModule } from './page-lancamento-edit/page-lancam
 import { BrMaskerModule } from 'br-mask';
 import { PageLancamentoHomeAddMenuComponent } from './page-lancamento-home-add-menu/page-lancamento-home-add-menu.component';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { Firebase } from '@ionic-native/firebase/ngx';
+import { FcmService } from './fcm.service';
+
+const config = {
+  apiKey: "AIzaSyAGbez12htJe7-1negiVN24RLMXRWWDjfA",
+  authDomain: "financas-croche.firebaseapp.com",
+  databaseURL: "https://financas-croche.firebaseio.com",
+  projectId: "financas-croche",
+  storageBucket: "financas-croche.appspot.com",
+  messagingSenderId: "744119417732",
+  appId: "1:744119417732:web:bb78d8fede472526"
+};
+
 @NgModule({
   declarations: [AppComponent, PageLancamentoHomeAddMenuComponent],
   entryComponents: [PageLancamentoHomeAddMenuComponent],
@@ -34,10 +49,14 @@ import { PageLancamentoHomeAddMenuComponent } from './page-lancamento-home-add-m
     BrowserAnimationsModule,
     PageLancamentoEditPageModule,
     BrMaskerModule,
+    AngularFireModule.initializeApp(config),
+    AngularFirestoreModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Firebase,
+    FcmService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
