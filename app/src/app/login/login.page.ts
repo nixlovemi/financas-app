@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from  "@angular/router";
 import { UsuarioService } from '../TbUsuario/usuario.service';
 import { UtilsService } from '../utils.service';
+import { FcmService } from '../fcm.service';
 
 @Component({
   selector: 'app-login',
@@ -20,11 +21,11 @@ export class LoginPage implements OnInit {
     public loadingCtr: LoadingController,
     public TbUsuario: UsuarioService,
     public utils: UtilsService,
-    private router: Router
+    private router: Router,
+    private fcm: FcmService,
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   login(){
     this.loadingCtr.create({
@@ -46,6 +47,8 @@ export class LoginPage implements OnInit {
         if(error == true || usu_ativo == false){
           this.utils.showAlert('Erro!', '', 'Usuário ou senha inválidos!', ['OK']);
         } else {
+          // var ret = this.fcm.subscribeTopic('lelex');
+          // this.fcm.unsubscribeTopic('lelex');
           this.router.navigate(['/homeIndex/page-inicio']);
         }
       })

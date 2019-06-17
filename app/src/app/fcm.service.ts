@@ -5,6 +5,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 
 @Injectable()
 export class FcmService {
+  // https://github.com/arnesson/cordova-plugin-firebase/blob/master/docs/API.md
 
   constructor(private firebase: Firebase,
               private afs: AngularFirestore,
@@ -28,14 +29,25 @@ export class FcmService {
   private saveToken(token) {
     if (!token) return;
 
-    const devicesRef = this.afs.collection('devices');
+    return token;
+    /*const devicesRef = this.afs.collection('devices');
 
     const data = {
       token,
       userId: 'testUserId'
     };
 
-    return devicesRef.doc(token).set(data);
+    return devicesRef.doc(token).set(data);*/
+  }
+
+  async subscribeTopic(topic){
+    var token = this.getToken();
+    return this.firebase.subscribe(topic);
+  }
+
+  async unsubscribeTopic(topic){
+    var token = this.getToken();
+    return this.firebase.unsubscribe(topic);
   }
 
   onNotifications() {
