@@ -153,6 +153,57 @@
               </ion-row>
             </ion-grid>
           </ion-item>
+
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="12">
+                  <p class="totais-gastos-title">RESUMO</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="12">
+                  <table width='100%' class="zui-table">
+                    <thead>
+                      <tr>
+                        <th>Cat.</th>
+                        <th>Prev.</th>
+                        <th>Real</th>
+                        <th>Dif</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Fixos</td>
+                        <td>R${{ itensCategoriaTotalSum[0]['arrFixos']['totalPrevistoFormatado'] }}</td>
+                        <td>R${{ itensCategoriaTotalSum[0]['arrFixos']['totalRealizadoFormatado'] }}</td>
+                        <td>R${{ itensCategoriaTotalSum[0]['arrFixos']['totalDiferencaFormatado'] }}</td>
+                      </tr>
+                      <tr>
+                        <td>Variáveis</td>
+                        <td>R${{ itensCategoriaTotalSum[0]['arrVariaveis']['totalPrevistoFormatado'] }}</td>
+                        <td>R${{ itensCategoriaTotalSum[0]['arrVariaveis']['totalRealizadoFormatado'] }}</td>
+                        <td>R${{ itensCategoriaTotalSum[0]['arrVariaveis']['totalDiferencaFormatado'] }}</td>
+                      </tr>
+                      <tr>
+                        <td>Invest.</td>
+                        <td>R${{ itensCategoriaTotalSum[0]['arrInvestimento']['totalPrevistoFormatado'] }}</td>
+                        <td>R${{ itensCategoriaTotalSum[0]['arrInvestimento']['totalRealizadoFormatado'] }}</td>
+                        <td>R${{ itensCategoriaTotalSum[0]['arrInvestimento']['totalDiferencaFormatado'] }}</td>
+                      </tr>
+                      <tr>
+                        <td>TOTAL</td>
+                        <td>R${{ vTotPrevisto | number:'1.2-2':'pt' }}</td>
+                        <td>R${{ vTotRealizado | number:'1.2-2':'pt' }}</td>
+                        <td>R${{ vTotDiferenca | number:'1.2-2':'pt' }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>

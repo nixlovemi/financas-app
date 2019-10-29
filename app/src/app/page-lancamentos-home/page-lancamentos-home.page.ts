@@ -116,69 +116,46 @@ export class PageLancamentosHomePage implements OnInit {
     })*/;
   }
 
-  carregaLancamentos(arrInfo){
-    this.TbLancamento.getLancamentos(arrInfo)
-    .then((response) => {
-      this.infoTabela = response["rows"];
+  async carregaLancamentos(arrInfo){
+    var response    = await this.TbLancamento.getLancamentos(arrInfo);
+    this.infoTabela = response["rows"];
 
-      this.infoTotais.receita_total_valor      = this.utils.formatMoney(response["totais"]["receita"]);
-      this.infoTotais.receita_total_pago       = this.utils.formatMoney(response["totais"]["receitaPaga"]);
-      this.infoTotais.receita_total_nao_contab = this.utils.formatMoney(response["totais"]["receitaNaoContabiliza"]);
-      this.infoTotais.despesa_total_pago       = this.utils.formatMoney(response["totais"]["despesa"]);
-      this.infoTotais.despesa_total_valor      = this.utils.formatMoney(response["totais"]["despesaPaga"]);
-      this.infoTotais.despesa_total_nao_contab = this.utils.formatMoney(response["totais"]["despesaNaoContabiliza"]);
-    })/*
-    .catch((err) => {
-      res.dismiss();
-      this.utils.showAlert('Erro!', '', 'Erro ao buscar lançamentos. Mensagem:' + err, ['OK']);
-    })*/;
+    this.infoTotais.receita_total_valor      = this.utils.formatMoney(response["totais"]["receita"]);
+    this.infoTotais.receita_total_pago       = this.utils.formatMoney(response["totais"]["receitaPaga"]);
+    this.infoTotais.receita_total_nao_contab = this.utils.formatMoney(response["totais"]["receitaNaoContabiliza"]);
+    this.infoTotais.despesa_total_pago       = this.utils.formatMoney(response["totais"]["despesa"]);
+    this.infoTotais.despesa_total_valor      = this.utils.formatMoney(response["totais"]["despesaPaga"]);
+    this.infoTotais.despesa_total_nao_contab = this.utils.formatMoney(response["totais"]["despesaNaoContabiliza"]);
   }
 
-  ionViewWillEnter(){
-    this.loadingCtr.create({
-      message: 'Carregando',
-      spinner: 'dots',
-    }).then((res) => {
-      res.present();
+  async ionViewWillEnter(){
+    await this.utils.getLoader('Carregando', 'dots');
 
-      this.carregaContasWS();
-      this.carregaDespesasWS();
+    this.carregaContasWS();
+    this.carregaDespesasWS();
 
-      let arrInfo = this.filterToArray();
-      this.carregaLancamentos(arrInfo);
+    let arrInfo = this.filterToArray();
+    await this.carregaLancamentos(arrInfo);
 
-      res.dismiss();
-    });
+    await this.utils.closeLoader();
   }
 
-  filtrar(){
+  async filtrar(){
     this.globals.setPgLctoMesBase(this.frmFiltros.mes_base);
+    await this.utils.getLoader('Carregando', 'dots');
 
-    this.loadingCtr.create({
-      message: 'Carregando',
-      spinner: 'dots',
-    }).then((res) => {
-      res.present();
+    let arrFilters  = this.filterToArray();
+    var response    = await this.TbLancamento.getLancamentos(arrFilters);
+    this.infoTabela = response["rows"];
 
-      let arrFilters = this.filterToArray();
-      this.TbLancamento.getLancamentos(arrFilters).then((response) => {
-        // response["limit"] | response["offset"]
-        res.dismiss();
-        this.infoTabela = response["rows"];
+    this.infoTotais.receita_total_valor      = this.utils.formatMoney(response["totais"]["receita"]);
+    this.infoTotais.receita_total_pago       = this.utils.formatMoney(response["totais"]["receitaPaga"]);
+    this.infoTotais.receita_total_nao_contab = this.utils.formatMoney(response["totais"]["receitaNaoContabiliza"]);
+    this.infoTotais.despesa_total_pago       = this.utils.formatMoney(response["totais"]["despesa"]);
+    this.infoTotais.despesa_total_valor      = this.utils.formatMoney(response["totais"]["despesaPaga"]);
+    this.infoTotais.despesa_total_nao_contab = this.utils.formatMoney(response["totais"]["despesaNaoContabiliza"]);
 
-        this.infoTotais.receita_total_valor      = this.utils.formatMoney(response["totais"]["receita"]);
-        this.infoTotais.receita_total_pago       = this.utils.formatMoney(response["totais"]["receitaPaga"]);
-        this.infoTotais.receita_total_nao_contab = this.utils.formatMoney(response["totais"]["receitaNaoContabiliza"]);
-        this.infoTotais.despesa_total_pago       = this.utils.formatMoney(response["totais"]["despesa"]);
-        this.infoTotais.despesa_total_valor      = this.utils.formatMoney(response["totais"]["despesaPaga"]);
-        this.infoTotais.despesa_total_nao_contab = this.utils.formatMoney(response["totais"]["despesaNaoContabiliza"]);
-      }).catch((err) => {
-        res.dismiss();
-        this.utils.showAlert('Erro!', '', 'Erro ao filtrar lançamentos. Mensagem:' + err, ['OK']);
-      });
-
-      res.onDidDismiss().then((dis) => { });
-    });
+    await this.utils.closeLoader();
   }
 
   clearInput(element){

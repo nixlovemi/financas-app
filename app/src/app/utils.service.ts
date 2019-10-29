@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ export class UtilsService {
 
   constructor(
     public alertCtr: AlertController,
+    public loadingCtr: LoadingController,
   ) {
     this.webServicePath = 'http://crochepassoapasso.com.br/financas/Rest/';
     this.appKey = '9837f6f54e56b471aaa046192d488587';
@@ -88,5 +89,20 @@ export class UtilsService {
 
     var novoValor = valor.replace(".", "").replace(",", ".").replace("R$", "").replace("US$", "").replace("U$", "").replace("$", "").replace(" ", "");
     return novoValor;
+  }
+
+  async getLoader(message, spinner)
+  {
+    return await this.loadingCtr.create({
+      message: message,
+      spinner: spinner,
+    }).then((res) => {
+      res.present();
+    });
+  }
+
+  async closeLoader()
+  {
+    return await this.loadingCtr.dismiss();
   }
 }

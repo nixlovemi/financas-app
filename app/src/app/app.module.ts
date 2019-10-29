@@ -21,6 +21,11 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { FcmService } from './fcm.service';
+import { CurrencyPipe } from '@angular/common';
+
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt, 'pt');
 
 const config = {
   apiKey: "AIzaSyAGbez12htJe7-1negiVN24RLMXRWWDjfA",
@@ -57,6 +62,7 @@ const config = {
     SplashScreen,
     Firebase,
     FcmService,
+    CurrencyPipe,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

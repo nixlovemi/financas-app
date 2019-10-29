@@ -29,7 +29,7 @@
 
     <form #form="ngForm" (ngSubmit)="filtrar()">
       <ion-item>
-        <ion-label>Mês Base</ion-label>
+        <ion-label position="stacked">Mês Base</ion-label>
         <ion-datetime
             name="mes_base"
             [(ngModel)]="frmFiltros.mes_base"
@@ -39,11 +39,12 @@
             (ionCancel)="clearInput('mes_base')"
             cancelText="Limpar"
             doneText="Selecionar"
+            class="ion-text-start"
         ></ion-datetime>
       </ion-item>
 
       <ion-item>
-        <ion-label>Vcto Inicial</ion-label>
+        <ion-label position="stacked">Vcto Inicial</ion-label>
         <ion-datetime
           name="vcto_inicial"
           [(ngModel)]="frmFiltros.vcto_inicial"
@@ -53,11 +54,12 @@
           (ionCancel)="clearInput('vcto_inicial')"
           cancelText="Limpar"
           doneText="Selecionar"
+          class="ion-text-start"
         ></ion-datetime>
       </ion-item>
 
       <ion-item>
-        <ion-label>Vcto Final</ion-label>
+        <ion-label position="stacked">Vcto Final</ion-label>
         <ion-datetime
           name="vcto_final"
           [(ngModel)]="frmFiltros.vcto_final"
@@ -67,11 +69,12 @@
           (ionCancel)="clearInput('vcto_final')"
           cancelText="Limpar"
           doneText="Selecionar"
+          class="ion-text-start"
         ></ion-datetime>
       </ion-item>
 
       <ion-item>
-        <ion-label>Pgto Inicial</ion-label>
+        <ion-label position="stacked">Pgto Inicial</ion-label>
         <ion-datetime
           name="pgto_inicial"
           [(ngModel)]="frmFiltros.pgto_inicial"
@@ -81,11 +84,12 @@
           (ionCancel)="clearInput('pgto_inicial')"
           cancelText="Limpar"
           doneText="Selecionar"
+          class="ion-text-start"
         ></ion-datetime>
       </ion-item>
 
       <ion-item>
-        <ion-label>Pgto Final</ion-label>
+        <ion-label position="stacked">Pgto Final</ion-label>
         <ion-datetime
           name="pgto_final"
           [(ngModel)]="frmFiltros.pgto_final"
@@ -95,61 +99,66 @@
           (ionCancel)="clearInput('pgto_final')"
           cancelText="Limpar"
           doneText="Selecionar"
+          class="ion-text-start"
         ></ion-datetime>
       </ion-item>
 
       <ion-item>
-        <ion-label>Descrição</ion-label>
-        <ion-input class="text-align-right" clearInput="true" name="descricao" [(ngModel)]="frmFiltros.descricao"></ion-input>
+        <ion-label position="stacked">Descrição</ion-label>
+        <ion-input class="text-align-left" clearInput="true" name="descricao" [(ngModel)]="frmFiltros.descricao"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label>Conta</ion-label>
+        <ion-label position="stacked">Conta</ion-label>
         <ion-select
           [(ngModel)]="frmFiltros.conta"
           name="conta"
           cancelText="Limpar"
           okText="Selecionar"
           (ionCancel)="clearInput('conta')"
+          class="ion-text-start"
         >
           <ion-select-option *ngFor="let c of itensConta" [value]="c.con_id">{{c.con_nome}}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
-        <ion-label>Tipo</ion-label>
+        <ion-label position="stacked">Tipo</ion-label>
         <ion-select
           [(ngModel)]="frmFiltros.tipo"
           name="tipo"
           cancelText="Limpar"
           okText="Selecionar"
           (ionCancel)="clearInput('tipo')"
+          class="ion-text-start"
         >
           <ion-select-option *ngFor="let t of itensTipo" [value]="t.id">{{t.text}}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
-        <ion-label>Categoria</ion-label>
+        <ion-label position="stacked">Categoria</ion-label>
         <ion-select
           [(ngModel)]="frmFiltros.categoria"
           name="categoria"
           cancelText="Limpar"
           okText="Selecionar"
           (ionCancel)="clearInput('categoria')"
+          class="ion-text-start"
         >
           <ion-select-option *ngFor="let c of itensBaseDespesa" [value]="c.bdp_id">{{c.bdp_descricao}}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
-        <ion-label>Exibir</ion-label>
+        <ion-label position="stacked">Exibir</ion-label>
         <ion-select
           [(ngModel)]="frmFiltros.exibir"
           name="exibir"
           cancelText="Limpar"
           okText="Selecionar"
           (ionCancel)="clearInput('exibir')"
+          class="ion-text-start"
         >
           <ion-select-option *ngFor="let e of itensExibir" [value]="e.id">{{e.text}}</ion-select-option>
         </ion-select>
@@ -161,49 +170,36 @@
     </form>
   </mat-expansion-panel>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <ion-list>
-          <ion-list-header>
-            Lançamentos
-          </ion-list-header>
+  <ion-list>
+    <ion-list-header>
+      <strong>Lançamentos</strong>
+    </ion-list-header>
 
-          <ion-item>
-            <table width='100%' class="zui-table">
-              <thead>
-                <tr>
-                  <th>Descrição</th>
-                  <th>Tipo</th>
-                  <th>Vcto</th>
-                  <th>Valor</th>
-                  <th>Categoria</th>
-                  <th>Pg</th>
-                  <th>Conta</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="tr-lancamentos" *ngFor="let l of infoTabela" (click)="editLcto(l.lanId)" [ngClass]="{'td-selected' : l.lanConfirmado == '1'}">
-                  <td>{{l.lanDespesa}}</td>
-                  <td>{{l.tipo}}</td>
-                  <td>{{l.lanVcto}}</td>
-                  <td>{{l.lanValor}}</td>
-                  <td>{{l.despesa}}</td>
-                  <td><ion-icon *ngIf=" l.lanPgto != '' " name="checkmark"></ion-icon></td>
-                  <td>{{l.conta}}</td>
-                </tr>
-                <tr>
-                  <td colspan="7" align="right">
-                    <small>Exibindo {{infoTabela.length}} linhas</small>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-item *ngFor="let l of infoTabela" (click)="editLcto(l.lanId)">
+      <ion-grid [ngClass]="{'td-selected' : l.lanConfirmado == '1'}">
+        <ion-row no-padding>
+          <ion-col no-padding size="9">
+            <ion-icon *ngIf="l.tipo == 'Despesa'" class="ion-float-left lcto-icon lcto-icon-despesa" name="md-remove-circle"></ion-icon>
+            <ion-icon *ngIf="l.tipo == 'Receita'" class="ion-float-left lcto-icon lcto-icon-receita" name="md-add-circle"></ion-icon>
+            <ion-icon *ngIf="l.tipo == 'Transferência'" class="ion-float-left lcto-icon" name="md-repeat"></ion-icon>
+            <span class="ion-float-left lcto-despesa">{{l.lanDespesa}}</span>
+          </ion-col>
+          <ion-col no-padding size="3" class="ion-text-end">
+            <span item-end class="lcto-valor">{{l.lanValor}}</span>
+          </ion-col>
+        </ion-row>
+        <ion-row no-padding>
+          <ion-col no-padding size="12">
+            <span class="ion-float-left lcto-despesa-details">
+              {{l.lanVcto}} | {{l.despesa}} |
+              <ion-icon *ngIf="l.lanPgto != ''" class="lcto-icon" name="md-cash"></ion-icon>
+            </span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <small class="ion-text-end" padding>Exibindo {{infoTabela.length}} linhas</small>
+  </ion-list>
 
   <ion-grid>
     <ion-row>
@@ -215,7 +211,7 @@
 
           <ion-item>
             <ion-grid>
-              <ion-row>
+              <ion-row class="tot-row-green">
                 <ion-col size="1">
                   <ion-icon class="icone-totais" name="cash"></ion-icon>
                 </ion-col>
@@ -229,7 +225,7 @@
 
           <ion-item>
             <ion-grid>
-              <ion-row>
+              <ion-row class="tot-row-green">
                 <ion-col size="1">
                   <ion-icon class="icone-totais" name="cash"></ion-icon>
                 </ion-col>
@@ -243,7 +239,7 @@
 
           <ion-item>
             <ion-grid>
-              <ion-row>
+              <ion-row class="tot-row-green">
                 <ion-col size="1">
                   <ion-icon class="icone-totais" name="cash"></ion-icon>
                 </ion-col>
@@ -257,7 +253,7 @@
 
           <ion-item>
             <ion-grid>
-              <ion-row>
+              <ion-row class="tot-row-red">
                 <ion-col size="1">
                   <ion-icon class="icone-totais" name="cash"></ion-icon>
                 </ion-col>
@@ -271,7 +267,7 @@
 
           <ion-item>
             <ion-grid>
-              <ion-row>
+              <ion-row class="tot-row-red">
                 <ion-col size="1">
                   <ion-icon class="icone-totais" name="cash"></ion-icon>
                 </ion-col>
@@ -285,7 +281,7 @@
 
           <ion-item>
             <ion-grid>
-              <ion-row>
+              <ion-row class="tot-row-red">
                 <ion-col size="1">
                   <ion-icon class="icone-totais" name="cash"></ion-icon>
                 </ion-col>

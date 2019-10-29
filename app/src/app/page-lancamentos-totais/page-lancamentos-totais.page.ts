@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
+import { CurrencyPipe } from '@angular/common';
 import { LancamentoService } from '../TbLancamento/lancamento.service';
 import { UtilsService } from '../utils.service';
 import { GlobalsService } from '../globals.service';
@@ -23,11 +24,16 @@ export class PageLancamentosTotaisPage implements OnInit {
   investTotalRealizado = '';
   investTotalDiferenca = '';
 
+  vTotPrevisto;
+  vTotRealizado;
+  vTotDiferenca;
+
   constructor(
     public utils: UtilsService,
     public TbLancamento: LancamentoService,
     public loadingCtr: LoadingController,
     public globals: GlobalsService,
+    public currencyPipe: CurrencyPipe,
   ) {  }
 
   ngOnInit() { }
@@ -113,6 +119,12 @@ export class PageLancamentosTotaisPage implements OnInit {
       sumInvestDif  = sumInvestDif + (vlrPrev - vlrReal);
     });
     // =================
+
+    this.vTotPrevisto  = sumFixosPrev + sumVariaveisPrev + sumInvestPrev;
+    this.vTotRealizado = sumFixosReal + sumVariaveisReal + sumInvestReal;
+    this.vTotDiferenca = sumFixosDif + sumVariaveisDif + sumInvestDif;
+
+    console.log(this.vTotPrevisto, this.vTotRealizado, this.vTotDiferenca);
 
     return [{
       arrFixos: {
