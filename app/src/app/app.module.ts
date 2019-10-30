@@ -27,14 +27,15 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 registerLocaleData(localePt, 'pt');
 
-const config = {
-  apiKey: "AIzaSyAGbez12htJe7-1negiVN24RLMXRWWDjfA",
-  authDomain: "financas-croche.firebaseapp.com",
-  databaseURL: "https://financas-croche.firebaseio.com",
-  projectId: "financas-croche",
-  storageBucket: "financas-croche.appspot.com",
-  messagingSenderId: "744119417732",
-  appId: "1:744119417732:web:bb78d8fede472526"
+var firebaseConfig = {
+  apiKey: "AIzaSyAGYKfXdt47eXyRbpQ1KLxN9e_EQodmLjU",
+  authDomain: "financas-app-5e785.firebaseapp.com",
+  databaseURL: "https://financas-app-5e785.firebaseio.com",
+  projectId: "financas-app-5e785",
+  storageBucket: "financas-app-5e785.appspot.com",
+  messagingSenderId: "394158193696",
+  appId: "1:394158193696:web:c3668677e1fca309281045",
+  measurementId: "G-EFZJE79BTH"
 };
 
 @NgModule({
@@ -54,7 +55,7 @@ const config = {
     BrowserAnimationsModule,
     PageLancamentoEditPageModule,
     BrMaskerModule,
-    AngularFireModule.initializeApp(config),
+    AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
   ],
   providers: [

@@ -31,7 +31,8 @@ export class AppComponent {
   }
 
   private notificationSetup() {
-    this.fcm.getToken();
+    // this.fcm.getToken();
+    this.fcm.subscribeTopic('financasapp');
     this.fcm.onNotifications().subscribe(
       (msg) => {
         if (this.platform.is('ios')) {

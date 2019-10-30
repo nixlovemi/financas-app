@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>744119417732-dn486jtvvsoc9id5lovqsrorr64robdj.apps.googleusercontent.com</string>
+	<string>394158193696-kdp03d91s0okqemgckoo373fs654f22k.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.744119417732-dn486jtvvsoc9id5lovqsrorr64robdj</string>
+	<string>com.googleusercontent.apps.394158193696-kdp03d91s0okqemgckoo373fs654f22k</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBm6bIsZOA8MktyEtclRJ6YUR6vGa-5vuY</string>
+	<string>AIzaSyAIghxECZX2jIVLuJiZpdIsv9NTajH4d6k</string>
 	<key>GCM_SENDER_ID</key>
-	<string>744119417732</string>
+	<string>394158193696</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>br.com.crochepassoapasso.financas.app</string>
+	<string>br.com.crochepassoapasso.financas.app1</string>
 	<key>PROJECT_ID</key>
-	<string>financas-croche</string>
+	<string>financas-app-5e785</string>
 	<key>STORAGE_BUCKET</key>
-	<string>financas-croche.appspot.com</string>
+	<string>financas-app-5e785.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:744119417732:ios:e54a8c3f7b43ae75</string>
+	<string>1:394158193696:ios:27fbcd429e23582e281045</string>
 	<key>DATABASE_URL</key>
-	<string>https://financas-croche.firebaseio.com</string>
+	<string>https://financas-app-5e785.firebaseio.com</string>
 </dict>
 </plist>

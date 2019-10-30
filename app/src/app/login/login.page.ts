@@ -13,8 +13,8 @@ import { FcmService } from '../fcm.service';
 export class LoginPage implements OnInit {
 
   frmLogin = {
-    usuario: '',
-    senha: ''
+    usuario: 'admin',
+    senha: 'verdaumsdrobs'
   };
 
   constructor(
