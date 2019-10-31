@@ -13,6 +13,41 @@
       <ion-col size="12">
         <ion-list>
           <ion-list-header>
+            Saldo Contas
+          </ion-list-header>
+
+          <ion-item *ngFor="let s of vArrSaldoContas">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="8">
+                  {{ s["contaDesc"] }}
+                </ion-col>
+                <ion-col size="4" class="ion-text-end">
+                  {{ s["strSaldo"] }}
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="8">
+                  TOTAL:
+                </ion-col>
+                <ion-col size="4" class="ion-text-end">
+                  {{ vTotalSaldoContas | number:'1.2-2':'pt' }}
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-list>
+          <ion-list-header>
             Totais Gastos
           </ion-list-header>
 
@@ -176,21 +211,21 @@
                     <tbody>
                       <tr>
                         <td>Fixos</td>
-                        <td>R${{ itensCategoriaTotalSum[0]['arrFixos']['totalPrevistoFormatado'] }}</td>
-                        <td>R${{ itensCategoriaTotalSum[0]['arrFixos']['totalRealizadoFormatado'] }}</td>
-                        <td>R${{ itensCategoriaTotalSum[0]['arrFixos']['totalDiferencaFormatado'] }}</td>
+                        <td>R${{ fixosTotalPrevisto }}</td>
+                        <td>R${{ fixosTotalRealizado }}</td>
+                        <td>R${{ fixosTotalDiferenca }}</td>
                       </tr>
                       <tr>
                         <td>Variáveis</td>
-                        <td>R${{ itensCategoriaTotalSum[0]['arrVariaveis']['totalPrevistoFormatado'] }}</td>
-                        <td>R${{ itensCategoriaTotalSum[0]['arrVariaveis']['totalRealizadoFormatado'] }}</td>
-                        <td>R${{ itensCategoriaTotalSum[0]['arrVariaveis']['totalDiferencaFormatado'] }}</td>
+                        <td>R${{ variavTotalPrevisto }}</td>
+                        <td>R${{ variavTotalRealizado }}</td>
+                        <td>R${{ variavTotalDiferenca }}</td>
                       </tr>
                       <tr>
                         <td>Invest.</td>
-                        <td>R${{ itensCategoriaTotalSum[0]['arrInvestimento']['totalPrevistoFormatado'] }}</td>
-                        <td>R${{ itensCategoriaTotalSum[0]['arrInvestimento']['totalRealizadoFormatado'] }}</td>
-                        <td>R${{ itensCategoriaTotalSum[0]['arrInvestimento']['totalDiferencaFormatado'] }}</td>
+                        <td>R${{ investTotalPrevisto }}</td>
+                        <td>R${{ investTotalRealizado }}</td>
+                        <td>R${{ investTotalDiferenca }}</td>
                       </tr>
                       <tr>
                         <td>TOTAL</td>

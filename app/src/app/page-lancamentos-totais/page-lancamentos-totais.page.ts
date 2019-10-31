@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { CurrencyPipe } from '@angular/common';
 import { LancamentoService } from '../TbLancamento/lancamento.service';
+import { ContaService } from '../TbConta/conta.service';
 import { UtilsService } from '../utils.service';
 import { GlobalsService } from '../globals.service';
 import { PageLancamentoEditPage } from '../page-lancamento-edit/page-lancamento-edit.page';
@@ -12,25 +13,28 @@ import { PageLancamentoEditPage } from '../page-lancamento-edit/page-lancamento-
   styleUrls: ['./page-lancamentos-totais.page.scss'],
 })
 export class PageLancamentosTotaisPage implements OnInit {
-  itensCategoriaTotal = [];
+  itensCategoriaTotal    = [];
   itensCategoriaTotalSum = [];
-  fixosTotalPrevisto   = '';
-  fixosTotalRealizado  = '';
-  fixosTotalDiferenca  = '';
-  variavTotalPrevisto  = '';
-  variavTotalRealizado = '';
-  variavTotalDiferenca = '';
-  investTotalPrevisto  = '';
-  investTotalRealizado = '';
-  investTotalDiferenca = '';
+  fixosTotalPrevisto     = '';
+  fixosTotalRealizado    = '';
+  fixosTotalDiferenca    = '';
+  variavTotalPrevisto    = '';
+  variavTotalRealizado   = '';
+  variavTotalDiferenca   = '';
+  investTotalPrevisto    = '';
+  investTotalRealizado   = '';
+  investTotalDiferenca   = '';
 
   vTotPrevisto;
   vTotRealizado;
   vTotDiferenca;
+  vArrSaldoContas   = [];
+  vTotalSaldoContas = 0;
 
   constructor(
     public utils: UtilsService,
     public TbLancamento: LancamentoService,
+    public TbConta: ContaService,
     public loadingCtr: LoadingController,
     public globals: GlobalsService,
     public currencyPipe: CurrencyPipe,
@@ -38,7 +42,8 @@ export class PageLancamentosTotaisPage implements OnInit {
 
   ngOnInit() { }
 
-  ionViewWillEnter(){
+  ionViewWillEnter()
+  {
     this.loadingCtr.create({
       message: 'Carregando',
       spinner: 'dots',
@@ -49,11 +54,31 @@ export class PageLancamentosTotaisPage implements OnInit {
       let ano = this.utils.formatDate(this.globals.getPgLctoMesBase(), 'YYYY');
 
       this.carregaCategoriaGastos(mes, ano);
+      this.carregaSaldoContas(mes, ano);
       res.dismiss();
     });
   }
 
-  carregaCategoriaGastos(mes, ano){
+  carregaSaldoContas(mes, ano)
+  {
+    this.TbConta.getSaldoContas(mes, ano)
+    .then((response: any[]) => {
+      this.vArrSaldoContas = response;
+
+      this.vTotalSaldoContas = 0;
+      for(let idx in this.vArrSaldoContas){
+        var item = this.vArrSaldoContas[idx];
+        this.vTotalSaldoContas = this.vTotalSaldoContas + item["saldo"];
+      }
+    })/*
+    .catch((err) => {
+      res.dismiss();
+      this.utils.showAlert('Erro!', '', 'Erro ao buscar categoria totais. Mensagem:' + err, ['OK']);
+    })*/;
+  }
+
+  carregaCategoriaGastos(mes, ano)
+  {
     this.TbLancamento.getCategoriaGastos(mes, ano)
     .then((response: any[]) => {
       this.itensCategoriaTotal    = response;
@@ -77,7 +102,8 @@ export class PageLancamentosTotaisPage implements OnInit {
     })*/;
   }
 
-  somaTotaisCatGastos(itensCategoriaTotal){
+  somaTotaisCatGastos(itensCategoriaTotal)
+  {
     // total fixos
     var sumFixosPrev = 0;
     var sumFixosReal = 0;
@@ -123,8 +149,6 @@ export class PageLancamentosTotaisPage implements OnInit {
     this.vTotPrevisto  = sumFixosPrev + sumVariaveisPrev + sumInvestPrev;
     this.vTotRealizado = sumFixosReal + sumVariaveisReal + sumInvestReal;
     this.vTotDiferenca = sumFixosDif + sumVariaveisDif + sumInvestDif;
-
-    console.log(this.vTotPrevisto, this.vTotRealizado, this.vTotDiferenca);
 
     return [{
       arrFixos: {

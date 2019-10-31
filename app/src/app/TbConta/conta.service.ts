@@ -33,4 +33,24 @@ export class ContaService {
       }
     );
   }
+
+  getSaldoContas(mes, ano)
+  {
+    return new Promise(
+      (resolve, reject) => {
+        var link   = this.wsPath + '/getSaldoContas';
+        var myData = JSON.stringify({'mes':mes, 'ano':ano, 'appkey':this.appKey});
+
+        this.http.post(link, myData)
+        .subscribe(data => {
+          let jsonRet;
+          jsonRet = JSON.parse(data["_body"]);
+
+          resolve(jsonRet);
+        }, error => {
+          reject('Erro ao buscar saldo das contas! Erro:' + error);
+        });
+      }
+    );
+  }
 }
